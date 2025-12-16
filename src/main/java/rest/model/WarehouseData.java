@@ -2,25 +2,34 @@ package rest.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+@JacksonXmlRootElement(localName = "warehouseData")
 public class WarehouseData {
-	
+
 	private String warehouseID;
 	private String warehouseName;
+	private String warehouseAddress;
+	private String warehousePostalCode;
+	private String warehouseCity;
+	private String warehouseCountry;
 	private String timestamp;
+
+	@JacksonXmlElementWrapper(localName = "productData")
+	@JacksonXmlProperty(localName = "product")
+	private List<ProductData> products;
 
 	/**
 	 * Constructor
 	 */
 	public WarehouseData() {
-		
 		this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
-
 	}
-	
-	/**
-	 * Setter and Getter Methods
-	 */
+
 	public String getWarehouseID() {
 		return warehouseID;
 	}
@@ -37,6 +46,38 @@ public class WarehouseData {
 		this.warehouseName = warehouseName;
 	}
 
+	public String getWarehouseAddress() {
+		return warehouseAddress;
+	}
+
+	public void setWarehouseAddress(String warehouseAddress) {
+		this.warehouseAddress = warehouseAddress;
+	}
+
+	public String getWarehousePostalCode() {
+		return warehousePostalCode;
+	}
+
+	public void setWarehousePostalCode(String warehousePostalCode) {
+		this.warehousePostalCode = warehousePostalCode;
+	}
+
+	public String getWarehouseCity() {
+		return warehouseCity;
+	}
+
+	public void setWarehouseCity(String warehouseCity) {
+		this.warehouseCity = warehouseCity;
+	}
+
+	public String getWarehouseCountry() {
+		return warehouseCountry;
+	}
+
+	public void setWarehouseCountry(String warehouseCountry) {
+		this.warehouseCountry = warehouseCountry;
+	}
+
 	public String getTimestamp() {
 		return timestamp;
 	}
@@ -45,12 +86,11 @@ public class WarehouseData {
 		this.timestamp = timestamp;
 	}
 
-	/**
-	 * Methods
-	 */
-	@Override
-	public String toString() {
-		String info = String.format("Warehouse Info: ID = %s, timestamp = %s", warehouseID, timestamp );
-		return info;
+	public List<ProductData> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductData> products) {
+		this.products = products;
 	}
 }
